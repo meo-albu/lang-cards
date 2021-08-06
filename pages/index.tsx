@@ -32,18 +32,17 @@ export default function Home({
 export async function getStaticProps() {
 
   const client = new ApolloClient({
-    uri: 'http://localhost:3000/api/words',
+    uri: 'https://countries.trevorblades.com',
     cache: new InMemoryCache()
   })
 
-  const {data: getCategories} = await client.query({
+  const {data} = await client.query({
     query: gql`
-      query Query {
-        getCategories {
-          title {
-            english
-            romanian
-          }
+      query Countries {
+        countries {
+          code
+          name
+          emoji
         }
       }
     `
@@ -51,7 +50,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      categories: getCategories
+      categories: data.countries.slice(0, 4)
     },
   }
 }
