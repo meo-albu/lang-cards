@@ -29,7 +29,7 @@ export default function Home({
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const client = new ApolloClient({
     uri: 'http://127.0.0.1:3000/api/words',
