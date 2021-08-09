@@ -25,7 +25,7 @@ function createApolloClient() {
     ssrMode: typeof window === "undefined",
     link: createIsomorphicLink(),
     cache: new InMemoryCache(),
-  });
+  })
 }
 
 export function initializeApollo(initialState: NormalizedCacheObject | null = null) {
