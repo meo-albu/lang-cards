@@ -19,6 +19,7 @@ export const typeDefs = gql`
   
   type Category {
     title: Title
+    slug: String
     words: [Word]
   }
 

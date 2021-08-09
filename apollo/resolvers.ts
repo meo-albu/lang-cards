@@ -6,8 +6,9 @@ export const resolvers = {
     getCategories: () => {
       try {
         const categories = require('words.json')
-        return categories.map(({ title, words }: Category) => ({
+        return categories.map(({ title, slug, words }: Category) => ({
           title,
+          slug,
           words
         }));
       } catch (error) {

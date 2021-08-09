@@ -4,6 +4,7 @@
       "english": "German Vocabulary List General",
       "romanian": "Lista germană de vocabular General"
     },
+    "slug": "general",
     "words": [
       {
         "id": "0001",
@@ -2508,6 +2509,7 @@
       "english": "Home and local area",
       "romanian": "Acasă și zona locală"
     },
+    "slug": "home",
     "words": [
       {
         "id": "0313",
@@ -7828,6 +7830,7 @@
       "english": "Health and sport",
       "romanian": "Sănătate și sport"
     },
+    "slug": "health-sport",
     "words": [
       {
         "id": "0977",
@@ -10732,6 +10735,7 @@
       "english": "Leisure and entertainment",
       "romanian": "Timp liber și divertisment"
     },
+    "slug": "entertainment",
     "words": [
       {
         "id": "1339",
@@ -12156,6 +12160,7 @@
       "english": "Travel and the wider world",
       "romanian": "Călătorii și lumea largă"
     },
+    "slug": "travel",
     "words": [
       {
         "id": "1516",
@@ -14356,6 +14361,7 @@
       "english": "Education and work",
       "romanian": "Educație și muncă"
     },
+    "slug": "education-work",
     "words": [
       {
         "id": "1790",

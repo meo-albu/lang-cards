@@ -16,5 +16,6 @@ export interface Word {
 
 export interface Category {
   title: Title
+  slug: String
   words: Word[]
 }
