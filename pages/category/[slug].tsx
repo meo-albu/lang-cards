@@ -3,11 +3,11 @@ import { Transition } from '@headlessui/react'
 
 import { gql, useQuery } from '@apollo/client'
 import { GetServerSideProps } from 'next'
-import { Word } from 'apollo/types'
+import { Word } from '../../apollo/types'
 import { useSelector } from 'react-redux'
-import { RootState } from 'store/reducers'
+import { RootState } from '../../store/reducers'
 
-const constants = require('constants.json')
+const constants = require('../../constants.json')
 
 const Query = gql`
   query Query($slug: String!) {
@@ -47,20 +47,20 @@ export default function Category({slug}: Props) {
   return (
     <div className='h-screen grid place-content-center bg-primary overflow-hidden'>
       {
-        data.getWords.map((word: Word, index: number) => {
+        data?.getWords.map((word: Word, index: number) => {
           return (
             <div key={word.id} className='w-80 relative bg-red-500'>
               {
-                  <Transition
-                    show={index === active}
-                    enter="transition-all duration-300"
-                    enterFrom={`opacity-0 ${direction === 'left' ? '-translate-x-full' : 'translate-x-full'}`}
-                    enterTo="opacity-100 translate-x-0"
-                    leave="transition-all duration-300"
-                    leaveFrom="opacity-100 translate-x-0"
-                    leaveTo={`opacity-0 ${direction === 'left' ? 'translate-x-full' : '-translate-x-full'}`}
-                    className='absolute bottom-0'
-                  >
+                  // <Transition
+                  //   show={index === active}
+                  //   enter="transition-all duration-300"
+                  //   enterFrom={`opacity-0 ${direction === 'left' ? '-translate-x-full' : 'translate-x-full'}`}
+                  //   enterTo="opacity-100 translate-x-0"
+                  //   leave="transition-all duration-300"
+                  //   leaveFrom="opacity-100 translate-x-0"
+                  //   leaveTo={`opacity-0 ${direction === 'left' ? 'translate-x-full' : '-translate-x-full'}`}
+                  //   className='absolute bottom-0'
+                  // >
                     <div style={{perspective: '800px'}} className="container w-80 h-48 relative" onClick={() => setFlipped(!flipped)}>
                       <div
                         style={{
@@ -79,7 +79,7 @@ export default function Category({slug}: Props) {
                         </div>
                       </div>
                     </div>
-                  </Transition>
+                  // </Transition>
               }
             </div>
           )
@@ -104,7 +104,7 @@ export default function Category({slug}: Props) {
             setFlipped(false)
             setActive(prev => prev + 1)
           }}
-          disabled={active === data.getWords.length}
+          disabled={active === data?.getWords.length}
         >
           next
         </button>

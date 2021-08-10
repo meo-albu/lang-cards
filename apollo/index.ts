@@ -4,6 +4,7 @@ import {
   NormalizedCacheObject,
 } from "@apollo/client";
 import { useMemo } from "react";
+import fetch from 'cross-fetch'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -16,7 +17,7 @@ function createIsomorphicLink() {
   } else {
     // client
     const { HttpLink } = require("@apollo/client/link/http");
-    return new HttpLink({ uri: "/api/words" });
+    return new HttpLink({ uri: "/api/words", fetch });
   }
 }
 
