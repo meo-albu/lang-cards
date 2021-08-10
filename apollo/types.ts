@@ -1,21 +1,21 @@
 export interface Title {
-  english: String
-  romanian: String
+  english: string
+  romanian: string
 }
 
 export interface Translation {
-  english: String
-  romanian: String
+  english: string
+  romanian: string
 }
 
 export interface Word {
-  id: String
-  german: String
+  id: string
+  german: string
   translations: Translation
 }
 
 export interface Category {
   title: Title
-  slug: String
+  slug: string
   words: Word[]
 }

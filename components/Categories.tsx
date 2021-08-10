@@ -36,7 +36,12 @@ export default function Categories({categories}: Props) {
             return (
               <Link
                 key={index}
-                href={`/category/${category.slug}`}
+                href={{
+                  pathname: `/category/${category.slug}`,
+                  query: {
+                    slug: category.slug
+                  }
+                }}
                 passHref
               >
                 <button

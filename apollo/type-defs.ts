@@ -25,5 +25,6 @@ export const typeDefs = gql`
 
   type Query {
     getCategories: [Category]
+    getWords(slug: String!): [Word]
   }
 `
