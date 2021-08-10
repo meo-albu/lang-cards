@@ -3,6 +3,10 @@ import React from 'react'
 import { gql, useQuery } from '@apollo/client'
 import { GetServerSideProps } from 'next'
 import { Word } from 'apollo/types'
+import { useSelector } from 'react-redux'
+import { RootState } from 'store/reducers'
+
+const constants = require('constants.json')
 
 const Query = gql`
   query Query($slug: String!) {
@@ -27,6 +31,8 @@ export default function Category({slug}: Props) {
   const [active, setActive] = React.useState(0)
   const [flipped, setFlipped] = React.useState(false)
 
+  const {currentLang} = useSelector((state: RootState) => state.langReducer)
+
   if (loading) return <span>loading...</span>
   return (
     <div className='h-screen grid place-content-center bg-primary'>
@@ -45,7 +51,13 @@ export default function Category({slug}: Props) {
                       className="card w-full h-full transition-transform duration-700 absolute shadow-2xl cursor-pointer"
                     >
                       <div style={{backfaceVisibility: 'hidden'}} className="front absolute h-full w-full bg-white rounded-md grid place-content-center">{word.german}</div>
-                      <div style={{transform: 'rotateY(180deg)', backfaceVisibility: 'hidden'}} className="back absolute h-full w-full bg-white rounded-md grid place-content-center">{word.translations.english}</div>
+                      <div style={{transform: 'rotateY(180deg)', backfaceVisibility: 'hidden'}} className="back absolute h-full w-full bg-white rounded-md grid place-content-center p-6 text-center">
+                        {
+                          word.translations[currentLang].length > 0
+                            ? word.translations[currentLang]
+                            : constants['no-translation'][currentLang]
+                        }
+                      </div>
                     </div>
                   </div>
               }

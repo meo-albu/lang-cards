@@ -4,7 +4,7 @@ import { RootState } from 'store/reducers'
 
 import Link from 'next/link'
 
-const constants = require('../constants.json')
+const constants = require('constants.json')
 
 interface Title {
   english: string

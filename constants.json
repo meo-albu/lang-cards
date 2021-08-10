@@ -6,5 +6,9 @@
   "categories-title": {
     "english": "Choose a category",
     "romanian": "Alege o categorie"
+  },
+  "no-translation": {
+    "english": "We currently do not have an English translation.",
+    "romanian": "Momentan nu avem traducerea pentru limba romana."
   }
 }
