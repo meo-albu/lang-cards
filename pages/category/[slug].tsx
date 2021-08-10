@@ -35,7 +35,15 @@ export default function Category({slug}: Props) {
 
   const {currentLang} = useSelector((state: RootState) => state.langReducer)
 
-  if (loading) return <span>loading...</span>
+  if (loading) return (
+    <div className='h-screen grid place-content-center bg-primary overflow-hidden'>
+      <div className="w-80 h-48 shadow-lg bg-white animate-pulse rounded-md" />
+      <div className='w-full flex justify-between mt-10'>
+        <div className='h-10 w-20 rounded-md bg-white animate-pulse' />
+        <div className='h-10 w-20 rounded-md bg-white animate-pulse' />
+      </div>
+    </div>
+  )
   return (
     <div className='h-screen grid place-content-center bg-primary overflow-hidden'>
       {
