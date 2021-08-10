@@ -45,10 +45,10 @@ export default function Category({slug}: Props) {
               {
                   <Transition
                     show={index === active}
-                    enter="transition-all duration-150 delay-150"
+                    enter="transition-all duration-300"
                     enterFrom={`opacity-0 ${direction === 'left' ? '-translate-x-full' : 'translate-x-full'}`}
                     enterTo="opacity-100 translate-x-0"
-                    leave="transition-all duration-150"
+                    leave="transition-all duration-300"
                     leaveFrom="opacity-100 translate-x-0"
                     leaveTo={`opacity-0 ${direction === 'left' ? 'translate-x-full' : '-translate-x-full'}`}
                     className='absolute bottom-0'
