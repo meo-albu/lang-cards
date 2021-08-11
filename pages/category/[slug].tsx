@@ -2,11 +2,11 @@ import React from 'react'
 import { Transition } from '@headlessui/react'
 
 import { gql, useQuery } from '@apollo/client'
-import { GetServerSideProps } from 'next'
-import { Word } from '../../apollo/types'
+import { Category as C, Word } from '../../apollo/types'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/reducers'
 import { initializeApollo } from '../../apollo'
+import { GetStaticProps } from 'next'
 
 const constants = require('../../constants.json')
 
@@ -114,20 +114,45 @@ export default function Category({slug}: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+const GET_CATEGORIES = gql`
+  query Query {
+    getCategories {
+      title {
+        english
+        romanian
+      }
+      slug
+    }
+  }
+`
+
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo()
+
+  const data = await apolloClient.query({
+    query: GET_CATEGORIES,
+  })
+
+  const paths = data.data.getCategories.map((category: C) => ({
+    params: { slug: category.slug },
+  }))
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
     query: Query,
     variables: {
-      slug: context.query.slug
+      slug: context?.params?.slug
     }
-  });
+  })
 
   return {
     props: { 
-      slug: context.query.slug,
+      slug: context?.params?.slug,
       initialApolloState: apolloClient.cache.extract()
-    }
+    },
   }
 }
