@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next'
 import { Word } from '../../apollo/types'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/reducers'
+import { initializeApollo } from '../../apollo'
 
 const constants = require('../../constants.json')
 
@@ -114,9 +115,19 @@ export default function Category({slug}: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: Query,
+    variables: {
+      slug: context.query.slug
+    }
+  });
+
   return {
     props: { 
-      slug: context.query.slug
+      slug: context.query.slug,
+      initialApolloState: apolloClient.cache.extract()
     }
   }
 }
