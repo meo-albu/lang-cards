@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import { screen, render, act } from '@testing-library/react';
-import Category from './[slug]'
+import Category from '../../pages/category/[slug]'
 
 import {MockedProvider} from '@apollo/client/testing'
 import { gql } from '@apollo/client';
