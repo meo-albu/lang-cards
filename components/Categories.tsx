@@ -38,9 +38,6 @@ export default function Categories({categories}: Props) {
                 key={index}
                 href={{
                   pathname: `/category/${category.slug}`,
-                  query: {
-                    slug: category.slug
-                  }
                 }}
                 passHref
               >
