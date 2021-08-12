@@ -1,7 +1,7 @@
 import {render} from '@testing-library/react'
-import Main from '../Main'
+import Main from 'components/Main'
 
-import rootReducer from '../../store/reducers'
+import rootReducer from 'store/reducers'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 

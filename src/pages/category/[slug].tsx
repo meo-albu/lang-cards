@@ -2,13 +2,13 @@ import React from 'react'
 import { Transition } from '@headlessui/react'
 
 import { gql, useQuery } from '@apollo/client'
-import { Category as C, Word } from '../../apollo/types'
+import { Category as C, Word } from 'apollo/types'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../store/reducers'
-import { initializeApollo } from '../../apollo'
+import { RootState } from 'store/reducers'
+import { initializeApollo } from 'apollo'
 import { GetStaticProps } from 'next'
 
-const constants = require('../../constants.json')
+const constants = require('constants.json')
 
 const Query = gql`
   query Query($slug: String!) {

@@ -1,9 +1,9 @@
-import rootReducer from '../../store/reducers'
+import rootReducer from 'store/reducers'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import { screen, render, act } from '@testing-library/react';
-import Category from '../../pages/category/[slug]'
+import Category from 'pages/category/[slug]'
 
 import {MockedProvider} from '@apollo/client/testing'
 import { gql } from '@apollo/client';

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { RootState } from 'store/reducers'
 
-const constants = require('../constants.json')
+const constants = require('constants.json')
 
 export default function Main() {
   const {currentLang} = useSelector((state: RootState) => state.langReducer)
