@@ -8,10 +8,13 @@ import ApolloProvider from './apollo/Provider'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import FlipCard from 'react-native-flip-card'
+
 import Home from './components/Home'
 import { useSelector } from 'react-redux'
 import { RootState } from './store/reducers'
 import { Text, View } from 'react-native'
+import tw from 'tailwind-react-native-classnames'
 
 export default function App() {
   return (
@@ -62,10 +65,24 @@ const Navigation = () => {
 
 const WordsScreen = () => {
   return(
-    <View>
-      <Text>
-        Words
-      </Text>
+    <View style={tw`bg-yellow-200 justify-center items-center flex-1`}>
+      <FlipCard 
+        style={tw`p-12 bg-white rounded-md m-6 shadow-md`}
+        friction={15}
+        perspective={1500}
+        flipHorizontal={true}
+        flipVertical={false}
+        flip={false}
+        alignHeight={true}
+        clickable={true}
+      >
+        <View>
+          <Text style={tw`text-center`}>The Face</Text>
+        </View>
+        <View>
+          <Text style={tw`text-center`}>The Back</Text>
+        </View>
+      </FlipCard>
     </View>
   )
 }
