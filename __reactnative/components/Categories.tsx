@@ -2,17 +2,62 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import tw from 'tailwind-react-native-classnames'
 
+import { gql, useQuery, ApolloQueryResult } from '@apollo/client'
+
 const categories = [
   'general',
   'home',
   'entertainment'
 ]
 
-export default function Categories() {
+const Query = gql`
+  query Query {
+    getCategories {
+      title {
+        english
+        romanian
+      }
+      slug
+    }
+  }
+`
+
+interface Title {
+  english: string
+  romanian: string
+}
+
+interface GetCategories {
+  title: Title
+  slug: string
+}
+
+interface IQuery {
+  getCategories: GetCategories[]
+}
+
+export default function Categories({navigation}: any) {
+  const { data, loading } = useQuery<ApolloQueryResult<IQuery>>(Query)
+
+  if(loading) {
+    return (
+      <View style={tw`p-6`}>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={tw`p-6`}>
       {
-        categories.map(cat => <Card key={cat} text={cat} />)
+        data.getCategories.map((category) => {
+          return (
+            <Card
+              key={category.slug}
+              text={category.title.english}
+            />
+          )
+        })
       }
     </View>
   )
