@@ -2,7 +2,9 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import tw from 'tailwind-react-native-classnames'
 
-import { gql, useQuery, ApolloQueryResult } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/reducers'
 
 const categories = [
   'general',
@@ -37,7 +39,9 @@ interface IQuery {
 }
 
 export default function Categories({navigation}: any) {
-  const { data, loading } = useQuery<ApolloQueryResult<IQuery>>(Query)
+  const { data, loading } = useQuery<IQuery>(Query)
+
+  const {currentLang} = useSelector((state: RootState) => state.langReducer)
 
   if(loading) {
     return (
@@ -50,11 +54,11 @@ export default function Categories({navigation}: any) {
   return (
     <View style={tw`p-6`}>
       {
-        data.getCategories.map((category) => {
+        data?.getCategories.map((category) => {
           return (
             <Card
               key={category.slug}
-              text={category.title.english}
+              text={category.title[currentLang]}
             />
           )
         })

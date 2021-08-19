@@ -28,7 +28,7 @@ const Home = ({navigation}: {navigation: StackNavigationProp<any>}) => {
   }, [dispatch])
 
   return (
-    <View style={tw`flex-1`}>
+    <View style={tw`flex-1 bg-yellow-200`}>
       <ScrollView>
         <Heading level={'1'} style='text-center p-6'>{heading[currentLang]}</Heading>
         <Categories navigation={navigation} />
