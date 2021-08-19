@@ -9,27 +9,64 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Home from './components/Home'
-
-const Stack = createNativeStackNavigator()
+import { useSelector } from 'react-redux'
+import { RootState } from './store/reducers'
+import { Text, View } from 'react-native'
 
 export default function App() {
   return (
     <NavigationContainer>
       <ReduxProvider>
         <ApolloProvider>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ 
-                // eslint-disable-next-line react/display-name
-                headerRight: () => <LangPicker />
-              }}
-            />
-          </Stack.Navigator>
+          <Navigation />
         </ApolloProvider>
       </ReduxProvider>
     </NavigationContainer>
+  )
+}
+
+export const Stack = createNativeStackNavigator()
+
+const Navigation = () => {
+  const {categories} = useSelector((state: RootState) => state.categoriesReducer)
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ 
+          // eslint-disable-next-line react/display-name
+          headerRight: () => <LangPicker />
+        }}
+      />
+      {
+        categories?.map(cat =>{
+          return (
+            <Stack.Screen
+              key={cat.slug}
+              name={cat.slug}
+              options={{
+                title: cat.name,
+                // eslint-disable-next-line react/display-name
+                headerRight: () => <LangPicker />
+              }}
+              component={WordsScreen}
+            />
+          )
+        })
+      }
+    </Stack.Navigator>
+  )
+}
+
+const WordsScreen = () => {
+  return(
+    <View>
+      <Text>
+        Words
+      </Text>
+    </View>
   )
 }
 
