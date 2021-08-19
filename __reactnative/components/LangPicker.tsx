@@ -6,15 +6,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RootState } from '../store/reducers'
 
-export default function Nav() {
+export default function LangPicker() {
   const {langs, currentLang} = useSelector((state: RootState) => state.langReducer)
 
   const dispatch = useDispatch()
   
   return (
-    <View style={tw`pt-10 w-full flex-row justify-end shadow-md bg-white`}>
+    <View style={tw`flex-row justify-end bg-white`}>
       <Picker
-        style={tw`pt-10 w-28`}
+        style={tw`pt-10 w-24`}
         selectedValue={currentLang}
         onValueChange={async(itemValue, itemIndex) => {
           await AsyncStorage.setItem('lang', itemValue)
@@ -24,8 +24,17 @@ export default function Nav() {
           })
         }}
       >
-        <Picker.Item label="RO" value="romanian" />
-        <Picker.Item label="EN" value="english" />
+        {
+          langs.map(lang => {
+            return (
+              <Picker.Item
+                key={lang}
+                label={lang.substr(0, 2).toUpperCase()}
+                value={lang}
+              />
+            )
+          })
+        }
       </Picker>
     </View>
   )
