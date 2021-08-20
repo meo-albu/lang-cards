@@ -2,59 +2,55 @@ import React from 'react'
 import FlipCard from 'react-native-flip-card'
 import { Pressable, Text, View } from 'react-native'
 import tw from 'tailwind-react-native-classnames'
+import { gql, useQuery } from '@apollo/client'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/reducers'
 
-export default function Words() {
+const constants = require('../constants.json')
 
-  const words = [
-    {
-      "id": "0001",
-      "german": "ab",
-      "translations": {
-        "english": "from (e.g. time)",
-        "romanian": ""
-      }
-    },
-    {
-      "id": "0002",
-      "german": "ab und zu",
-      "translations": {
-        "english": "now and again",
-        "romanian": ""
-      }
-    },
-    {
-      "id": "0003",
-      "german": "Abend (abends)",
-      "translations": {
-        "english": "(in the) evening",
-        "romanian": ""
-      }
-    },
-    {
-      "id": "0004",
-      "german": "als/ wenn",
-      "translations": {
-        "english": "when (conj)",
-        "romanian": ""
-      }
-    },
-    {
-      "id": "0005",
-      "german": "bald (bis bald)",
-      "translations": {
-        "english": "soon (see you…soon!)",
-        "romanian": ""
+const Query = gql`
+  query Query($slug: String!) {
+    getWords(slug: $slug) {
+      german
+      id
+      translations {
+        english
+        romanian
       }
     }
-  ]
+  }
+`
+
+interface IQuery {
+  getWords: {
+    german: string
+    id: string
+    translations: {
+      english: string
+      romanian: string
+    }
+  }[]
+}
+
+export default function Words({route}: {route: any}) {
+
+  const {slug} = route.params
+
+  const { data, loading } = useQuery<IQuery>(Query, {variables: {slug}})
+
+  const {currentLang} = useSelector((state: RootState) => state.langReducer)
+
+  const words = data?.getWords || []
 
   const [active, setActive] = React.useState(0)
+  
+  if(loading) return <View><Text>Loading...</Text></View>
 
   return (
     <View style={tw`bg-yellow-200 justify-center flex-1 py-20 px-6`}>
 
       {
-        words.map((word, index) => {
+        words?.map((word, index) => {
           if(index === active)
             return (
               <FlipCard 
@@ -72,7 +68,12 @@ export default function Words() {
                   <Text style={tw`text-center text-xl`}>{word.german}</Text>
                 </View>
                 <View style={tw`flex-1 flex justify-center`}>
-                  <Text style={tw`text-center text-xl`}>{word.translations.english}</Text>
+                  <Text style={tw`text-center text-xl`}>
+                    {
+                      word.translations[currentLang].length > 0
+                        ? word.translations[currentLang]
+                        : constants['no-translation'][currentLang]
+                    }</Text>
                 </View>
               </FlipCard>
             )

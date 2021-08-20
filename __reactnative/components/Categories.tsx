@@ -78,7 +78,9 @@ export default function Categories({navigation}: {navigation: StackNavigationPro
             <View key={category.slug}>
               <Pressable
                 onPress={() => {
-                  navigation.navigate(category.slug)
+                  navigation.navigate(category.slug, {
+                    slug: category.slug
+                  })
                 }}
               >
                 <Card
