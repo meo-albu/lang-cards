@@ -5,6 +5,7 @@ import tw from 'tailwind-react-native-classnames'
 import { gql, useQuery } from '@apollo/client'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/reducers'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const constants = require('../constants.json')
 
@@ -48,7 +49,6 @@ export default function Words({route}: {route: any}) {
 
   return (
     <View style={tw`bg-yellow-200 justify-center flex-1 py-20 px-6`}>
-
       {
         words?.map((word, index) => {
           if(index === active)
