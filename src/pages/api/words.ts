@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader(
     'Access-Control-Allow-Origin',
-    'https://studio.apollographql.com'
+    '*'
   )
   res.setHeader(
     'Access-Control-Allow-Headers',
